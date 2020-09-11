@@ -4,7 +4,11 @@ install.packages("data.table")
 library(data.table)
 install.packages("reshape")
 library(reshape)  
-### method 2
-X<- cbind(Lon1, Lat1)
-Y<- cbind(Lon2, Lat2)
-distGeo(X, Y)
+#### method 1
+
+# Distances in meters on an ellipsoid:
+
+setDT(data)[ , dist_km := distGeo(matrix(c(Lon1, Lat1), ncol = 2), 
+                                  matrix(c(Lon2, Lat2), ncol = 2))/1000]
+
+write.csv(data, file = "CBD_Dist.csv")
