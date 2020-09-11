@@ -1,0 +1,6 @@
+install.packages("geosphere")
+library(geosphere)
+install.packages("data.table")
+library(data.table)
+install.packages("reshape")
+library(reshape)  
