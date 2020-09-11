@@ -4,3 +4,17 @@ install.packages("data.table")
 library(data.table)
 install.packages("reshape")
 library(reshape)  
+data <- read.csv(file.choose())
+
+head(data)
+
+names(data) <- c("Lon1",   "Lat1",   "Lon2", "Lat2")
+
+#### method 1
+
+# Distances in Kilo meters on an ellipsoid:
+
+setDT(data)[ , dist_km := distGeo(matrix(c(Lon1, Lat1), ncol = 2), 
+                                  matrix(c(Lon2, Lat2), ncol = 2))/1000]
+
+write.csv(data, file = "CBD_Dist.csv")
